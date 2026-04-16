@@ -35,7 +35,7 @@ Plans:
 - [x] 01-01-PLAN.md — Next.js 16 project initialization with TypeScript and Biome
 - [x] 01-02-PLAN.md — Drizzle schema with Resources and Tags tables, migrations
 - [ ] 01-03-PLAN.md — Meilisearch setup via Docker with index configuration
-- [ ] 01-04-PLAN.md — Database seeding with quantum-Bitcoin resources and smoke test
+- [x] 01-04-PLAN.md — Database seeding with quantum-Bitcoin resources and smoke test
 - [ ] 01-05-PLAN.md — Backup/restore documentation and validation procedures
 
 ### Phase 2: Public Discovery Interface
