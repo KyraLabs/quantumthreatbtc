@@ -1,6 +1,4 @@
-import { db, sql } from '../db/index';
-import { resources, tags } from '../db/schema';
-import { eq } from 'drizzle-orm';
+import { sql } from '../db/index';
 
 async function runSmokeTest() {
   console.log('Running backup restore smoke test...');
@@ -10,34 +8,34 @@ async function runSmokeTest() {
     console.log('✓ Database connection successful');
     console.log(`  PostgreSQL version: ${result[0].version}`);
 
-    const resourceCount = await db.select({ count: sql`count(*)` }).from(resources);
+    const resourceCount = await sql`SELECT count(*)::int as count FROM resources`;
     console.log(`✓ Resources table accessible: ${resourceCount[0].count} rows`);
 
     if (Number(resourceCount[0].count) === 0) {
       throw new Error('Resources table is empty — backup may be incomplete');
     }
 
-    const sampleId = 'TBD';
+    const sampleId = '019d9481-b79b-7287-9f8c-1e6d18a26b29';
 
     if (sampleId !== 'TBD') {
-      const sampleResource = await db.query.resources.findFirst({
-        where: eq(resources.id, sampleId),
-      });
-      if (!sampleResource) {
+      const sampleResource = await sql`
+        SELECT id, title FROM resources WHERE id = ${sampleId}
+      `;
+      if (sampleResource.length === 0) {
         console.warn('⚠ Known sample resource not found');
       } else {
-        console.log(`✓ Sample resource verified: ${sampleResource.title}`);
+        console.log(`✓ Sample resource verified: ${sampleResource[0].title}`);
       }
     }
 
-    const firstResource = await db.query.resources.findFirst();
-    if (firstResource) {
-      console.log(`✓ Fallback resource verified: ${firstResource.title}`);
+    const firstResource = await sql`SELECT id, title FROM resources LIMIT 1`;
+    if (firstResource.length > 0) {
+      console.log(`✓ Fallback resource verified: ${firstResource[0].title}`);
     } else {
       throw new Error('No resources found — backup is empty');
     }
 
-    const tagCount = await db.select({ count: sql`count(*)` }).from(tags);
+    const tagCount = await sql`SELECT count(*)::int as count FROM tags`;
     console.log(`✓ Tags table accessible: ${tagCount[0].count} rows`);
 
     const indexes = await sql`

@@ -1,5 +1,6 @@
 import { MeiliSearch } from 'meilisearch';
 import type { Resource } from '../db/schema';
+import 'dotenv/config';
 
 if (!process.env.MEILISEARCH_URL || !process.env.MEILISEARCH_MASTER_KEY) {
   throw new Error('Missing Meilisearch environment variables');
