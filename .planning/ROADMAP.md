@@ -12,7 +12,7 @@ This roadmap delivers a curated resource hub for Bitcoin quantum resistance rese
 
 Decimal phases appear between their surrounding integers in numeric order.
 
-- [ ] **Phase 1: Foundation & Data Model** - Database schema with controlled taxonomy and search infrastructure
+- [x] **Phase 1: Foundation & Data Model** - Database schema with controlled taxonomy and search infrastructure
 - [ ] **Phase 2: Public Discovery Interface** - Browse, search, filter, and view resources
 - [ ] **Phase 3: Admin Authentication** - Secure admin access with defense-in-depth
 - [ ] **Phase 4: Content Management** - Admin panel for resource CRUD operations
@@ -34,9 +34,9 @@ Decimal phases appear between their surrounding integers in numeric order.
 Plans:
 - [x] 01-01-PLAN.md — Next.js 16 project initialization with TypeScript and Biome
 - [x] 01-02-PLAN.md — Drizzle schema with Resources and Tags tables, migrations
-- [ ] 01-03-PLAN.md — Meilisearch setup via Docker with index configuration
+- [x] 01-03-PLAN.md — Meilisearch setup via Docker with index configuration
 - [x] 01-04-PLAN.md — Database seeding with quantum-Bitcoin resources and smoke test
-- [ ] 01-05-PLAN.md — Backup/restore documentation and validation procedures
+- [x] 01-05-PLAN.md — Backup/restore documentation and validation procedures
 
 ### Phase 2: Public Discovery Interface
 **Goal**: Users can discover, search, filter, and explore quantum-Bitcoin resources
@@ -88,7 +88,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. Foundation & Data Model | 1/5 | In Progress | - |
+| 1. Foundation & Data Model | 5/5 | ✅ Completed | 2026-04-16 |
 | 2. Public Discovery Interface | 0/TBD | Not started | - |
 | 3. Admin Authentication | 0/TBD | Not started | - |
 | 4. Content Management | 0/TBD | Not started | - |
