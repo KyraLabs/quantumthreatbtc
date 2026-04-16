@@ -33,7 +33,7 @@ Decimal phases appear between their surrounding integers in numeric order.
 
 Plans:
 - [ ] 01-01-PLAN.md — Next.js 16 project initialization with TypeScript and Biome
-- [ ] 01-02-PLAN.md — Drizzle schema with Resources and Tags tables, migrations
+- [x] 01-02-PLAN.md — Drizzle schema with Resources and Tags tables, migrations
 - [ ] 01-03-PLAN.md — Meilisearch setup via Docker with index configuration
 - [ ] 01-04-PLAN.md — Database seeding with quantum-Bitcoin resources and smoke test
 - [ ] 01-05-PLAN.md — Backup/restore documentation and validation procedures
@@ -88,7 +88,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. Foundation & Data Model | 0/5 | Planning complete | - |
+| 1. Foundation & Data Model | 1/5 | In Progress | - |
 | 2. Public Discovery Interface | 0/TBD | Not started | - |
 | 3. Admin Authentication | 0/TBD | Not started | - |
 | 4. Content Management | 0/TBD | Not started | - |
