@@ -66,7 +66,7 @@ Neon provides automatic continuous backups using Write-Ahead Log (WAL) archiving
 ```bash
 # Temporarily use restored database
 export DATABASE_URL="NEW_DATABASE_URL_FROM_STEP_4"
-npm run tsx scripts/smoke-test.ts
+npx tsx scripts/smoke-test.ts
 ```
 
 Expected: All checks pass (✓ Database connection, ✓ Resources table, etc.)
@@ -157,7 +157,7 @@ pg_restore \
 
 # Run smoke test
 export DATABASE_URL="$STAGING_DATABASE_URL"
-npm run tsx scripts/smoke-test.ts
+npx tsx scripts/smoke-test.ts
 ```
 
 **Flags explained:**
@@ -171,7 +171,7 @@ npm run tsx scripts/smoke-test.ts
 After ANY restore (PITR or pg_dump), ALWAYS run the smoke test:
 
 ```bash
-npm run tsx scripts/smoke-test.ts
+npx tsx scripts/smoke-test.ts
 ```
 
 **What the smoke test checks:**
@@ -204,7 +204,7 @@ Per D-08, backup restore procedures should be tested regularly:
 # 2. Get new DATABASE_URL
 # 3. Test locally
 export DATABASE_URL="RESTORED_BRANCH_URL"
-npm run tsx scripts/smoke-test.ts
+npx tsx scripts/smoke-test.ts
 
 # 4. Document results
 echo "$(date): PITR restore successful" >> docs/restore_test_log.txt
