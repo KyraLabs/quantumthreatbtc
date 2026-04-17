@@ -2,10 +2,8 @@
 set -euo pipefail
 
 if [ -z "${DATABASE_URL:-}" ] && [ -f ".env" ]; then
-  set -a
-  # shellcheck source=.env
-  source .env
-  set +a
+  DATABASE_URL="$(grep '^DATABASE_URL=' .env | cut -d'=' -f2-)"
+  export DATABASE_URL
 fi
 
 # Manual restore script for QuantumThreat BTC database
