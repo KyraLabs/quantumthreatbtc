@@ -37,9 +37,9 @@ Plans:
 - [x] 01-03-PLAN.md — Meilisearch setup via Docker with index configuration
 - [x] 01-04-PLAN.md — Database seeding with quantum-Bitcoin resources and smoke test
 - [x] 01-05-PLAN.md — Backup/restore documentation and validation procedures
-- [ ] 01-06-PLAN.md — [GAP] Biome lint fixes: non-null assertions, formatter, drizzle/meta exclusion
-- [ ] 01-07-PLAN.md — [GAP] Meilisearch seed: await task completion before process exit
-- [ ] 01-08-PLAN.md — [GAP] backup.sh and restore.sh auto-load .env
+- [x] 01-06-PLAN.md — [GAP] Biome lint fixes: non-null assertions, formatter, drizzle/meta exclusion
+- [x] 01-07-PLAN.md — [GAP] Meilisearch seed: await task completion before process exit
+- [x] 01-08-PLAN.md — [GAP] backup.sh and restore.sh auto-load .env
 
 ### Phase 2: Public Discovery Interface
 **Goal**: Users can discover, search, filter, and explore quantum-Bitcoin resources
