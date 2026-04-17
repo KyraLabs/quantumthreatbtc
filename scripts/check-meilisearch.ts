@@ -1,4 +1,5 @@
 import { meilisearchClient } from '../lib/meilisearch';
+
 (async () => {
   try {
     const index = meilisearchClient.index('resources');

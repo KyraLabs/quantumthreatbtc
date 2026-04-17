@@ -18,14 +18,7 @@ export async function initializeMeilisearchIndex() {
     searchableAttributes: ['title', 'summary', 'authors', 'tags'],
     filterableAttributes: ['type', 'date', 'technical_level', 'tags'],
     sortableAttributes: ['date'],
-    rankingRules: [
-      'words',
-      'typo',
-      'proximity',
-      'attribute',
-      'sort',
-      'exactness',
-    ],
+    rankingRules: ['words', 'typo', 'proximity', 'attribute', 'sort', 'exactness'],
     typoTolerance: {
       enabled: true,
       minWordSizeForTypos: {

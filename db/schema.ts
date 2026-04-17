@@ -1,5 +1,5 @@
-import { pgTable, uuid, text, timestamp, jsonb, index } from 'drizzle-orm/pg-core';
 import { sql } from 'drizzle-orm';
+import { index, jsonb, pgTable, text, timestamp, uuid } from 'drizzle-orm/pg-core';
 
 export const resources = pgTable(
   'resources',

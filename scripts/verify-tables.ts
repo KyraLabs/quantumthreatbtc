@@ -8,6 +8,6 @@ import 'dotenv/config';
     ORDER BY tablename
   `;
   console.log('Tables in database:');
-  tables.forEach(t => console.log('  -', t.tablename));
+  tables.forEach((t) => console.log('  -', t.tablename));
   await sql.end();
 })();

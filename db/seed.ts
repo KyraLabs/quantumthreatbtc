@@ -1,6 +1,6 @@
+import { syncResourceToMeilisearch } from '../lib/meilisearch';
 import { db } from './index';
 import { resources, tags } from './schema';
-import { syncResourceToMeilisearch } from '../lib/meilisearch';
 
 async function seed() {
   console.log('Seeding database...');
@@ -31,7 +31,8 @@ async function seed() {
   const resourceData = [
     {
       title: "Bitcoin's Vulnerability to Shor's Algorithm: A Timeline Analysis",
-      summary: 'Comprehensive analysis of how quantum computing threatens Bitcoin\'s ECDSA-based security model. Examines timeline estimates for practical quantum attacks and discusses transition strategies to post-quantum cryptography.',
+      summary:
+        "Comprehensive analysis of how quantum computing threatens Bitcoin's ECDSA-based security model. Examines timeline estimates for practical quantum attacks and discusses transition strategies to post-quantum cryptography.",
       type: 'Paper',
       date: new Date('2024-03-15'),
       external_link: 'https://arxiv.org/abs/2403.12345',
@@ -47,7 +48,8 @@ async function seed() {
     },
     {
       title: 'BIP-360: Post-Quantum Signature Scheme Integration',
-      summary: 'Proposes integrating CRYSTALS-Dilithium as optional post-quantum signature scheme in Bitcoin protocol. Includes backward compatibility analysis and migration path from ECDSA/Schnorr.',
+      summary:
+        'Proposes integrating CRYSTALS-Dilithium as optional post-quantum signature scheme in Bitcoin protocol. Includes backward compatibility analysis and migration path from ECDSA/Schnorr.',
       type: 'BIP',
       date: new Date('2025-01-20'),
       external_link: 'https://github.com/bitcoin/bips/blob/master/bip-0360.mediawiki',
@@ -62,7 +64,8 @@ async function seed() {
     },
     {
       title: 'Understanding Harvest Now, Decrypt Later Attacks',
-      summary: 'Beginner-friendly explanation of adversarial strategy to store encrypted Bitcoin transactions today and decrypt them once quantum computers become available. Discusses implications for long-term hodlers.',
+      summary:
+        'Beginner-friendly explanation of adversarial strategy to store encrypted Bitcoin transactions today and decrypt them once quantum computers become available. Discusses implications for long-term hodlers.',
       type: 'Article',
       date: new Date('2025-11-05'),
       external_link: 'https://bitcoin-magazine.com/technical/quantum-harvest-decrypt-later',
@@ -77,21 +80,30 @@ async function seed() {
     },
     {
       title: 'NIST Post-Quantum Cryptography Standardization: Implications for Bitcoin',
-      summary: 'Analysis of NIST\'s selected post-quantum algorithms (CRYSTALS-Dilithium, CRYSTALS-Kyber, FALCON, SPHINCS+) and their suitability for Bitcoin\'s use cases. Compares signature sizes, verification times, and security assumptions.',
+      summary:
+        "Analysis of NIST's selected post-quantum algorithms (CRYSTALS-Dilithium, CRYSTALS-Kyber, FALCON, SPHINCS+) and their suitability for Bitcoin's use cases. Compares signature sizes, verification times, and security assumptions.",
       type: 'Research',
       date: new Date('2024-08-12'),
       external_link: 'https://research.example.com/nist-pqc-bitcoin',
       technical_level: 'Advanced',
       authors: ['Dr. Charlie Researcher', 'Dr. Diana Analyst'],
-      tags: ['NIST PQC', 'CRYSTALS-Dilithium', 'CRYSTALS-Kyber', 'FALCON', 'SPHINCS+', 'Signature Schemes'],
+      tags: [
+        'NIST PQC',
+        'CRYSTALS-Dilithium',
+        'CRYSTALS-Kyber',
+        'FALCON',
+        'SPHINCS+',
+        'Signature Schemes',
+      ],
       extras: {
         conference: 'Financial Cryptography 2024',
         presentation_slides_url: 'https://example.com/slides/nist-pqc.pdf',
       },
     },
     {
-      title: 'Grover\'s Algorithm Impact on Bitcoin Mining',
-      summary: 'Examines whether Grover\'s algorithm provides quadratic speedup for Bitcoin\'s SHA-256 mining, reducing effective security from 256 bits to 128 bits. Concludes threat is minimal compared to signature vulnerabilities.',
+      title: "Grover's Algorithm Impact on Bitcoin Mining",
+      summary:
+        "Examines whether Grover's algorithm provides quadratic speedup for Bitcoin's SHA-256 mining, reducing effective security from 256 bits to 128 bits. Concludes threat is minimal compared to signature vulnerabilities.",
       type: 'Paper',
       date: new Date('2023-06-22'),
       external_link: 'https://eprint.iacr.org/2023/789',
@@ -106,7 +118,8 @@ async function seed() {
     },
     {
       title: 'Taproot and Schnorr: Preparing Bitcoin for Quantum Resistance',
-      summary: 'Explores how Taproot\'s Schnorr signatures provide a foundation for quantum-resistant upgrades. Discusses compatibility with post-quantum signature aggregation and privacy benefits.',
+      summary:
+        "Explores how Taproot's Schnorr signatures provide a foundation for quantum-resistant upgrades. Discusses compatibility with post-quantum signature aggregation and privacy benefits.",
       type: 'Article',
       date: new Date('2024-05-10'),
       external_link: 'https://bitcoinops.org/en/quantum-taproot-schnorr',
@@ -121,7 +134,8 @@ async function seed() {
     },
     {
       title: 'SPHINCS+ Hash-Based Signatures for Bitcoin',
-      summary: 'Evaluates SPHINCS+ as a stateless hash-based signature scheme for Bitcoin. Analyzes signature size trade-offs (7.8KB-49KB depending on parameter set) and long-term security guarantees.',
+      summary:
+        'Evaluates SPHINCS+ as a stateless hash-based signature scheme for Bitcoin. Analyzes signature size trade-offs (7.8KB-49KB depending on parameter set) and long-term security guarantees.',
       type: 'Research',
       date: new Date('2025-03-18'),
       external_link: 'https://sphincs.org/bitcoin-evaluation',
@@ -135,7 +149,8 @@ async function seed() {
     },
     {
       title: 'Quantum Key Distribution: Irrelevant for Bitcoin?',
-      summary: 'Argues that quantum key distribution (QKD) does not solve Bitcoin\'s quantum threat because public key cryptography is used for authentication, not symmetric encryption. Clarifies common misconceptions.',
+      summary:
+        "Argues that quantum key distribution (QKD) does not solve Bitcoin's quantum threat because public key cryptography is used for authentication, not symmetric encryption. Clarifies common misconceptions.",
       type: 'Article',
       date: new Date('2024-11-28'),
       external_link: 'https://bitcoin-magazine.com/technical/qkd-bitcoin-misconceptions',
@@ -149,7 +164,8 @@ async function seed() {
     },
     {
       title: 'CRYSTALS-Kyber for Bitcoin Key Encapsulation',
-      summary: 'Proposes using CRYSTALS-Kyber (NIST PQC standard for key encapsulation) for Bitcoin\'s potential future encrypted communication layers. Discusses use cases for Lightning Network and P2P encryption.',
+      summary:
+        "Proposes using CRYSTALS-Kyber (NIST PQC standard for key encapsulation) for Bitcoin's potential future encrypted communication layers. Discusses use cases for Lightning Network and P2P encryption.",
       type: 'Research',
       date: new Date('2025-07-14'),
       external_link: 'https://research.kyber-bitcoin.com/kem-proposal',
@@ -163,7 +179,8 @@ async function seed() {
     },
     {
       title: 'FALCON Signatures: Compact Alternative to Dilithium',
-      summary: 'Compares FALCON and CRYSTALS-Dilithium for Bitcoin. FALCON offers smaller signatures (~600 bytes vs ~2.4KB) but slower signing. Evaluates trade-offs for different Bitcoin use cases.',
+      summary:
+        'Compares FALCON and CRYSTALS-Dilithium for Bitcoin. FALCON offers smaller signatures (~600 bytes vs ~2.4KB) but slower signing. Evaluates trade-offs for different Bitcoin use cases.',
       type: 'Paper',
       date: new Date('2024-09-05'),
       external_link: 'https://falcon-sign.info/bitcoin-comparison.pdf',
@@ -177,7 +194,8 @@ async function seed() {
     },
     {
       title: 'Timeline for Economically Viable Quantum Attacks on Bitcoin',
-      summary: 'Synthesizes estimates from multiple sources on when quantum computers capable of breaking Bitcoin\'s ECDSA will be economically feasible. Estimates range from 2030 (optimistic) to 2050 (conservative).',
+      summary:
+        "Synthesizes estimates from multiple sources on when quantum computers capable of breaking Bitcoin's ECDSA will be economically feasible. Estimates range from 2030 (optimistic) to 2050 (conservative).",
       type: 'Article',
       date: new Date('2025-04-20'),
       external_link: 'https://quantumthreat.info/bitcoin-timeline',
@@ -191,7 +209,8 @@ async function seed() {
     },
     {
       title: 'BIP-420: Quantum-Safe Address Format',
-      summary: 'Proposes new address format for quantum-resistant keys. Includes bech32m extension for post-quantum public keys and backward compatibility with existing wallets.',
+      summary:
+        'Proposes new address format for quantum-resistant keys. Includes bech32m extension for post-quantum public keys and backward compatibility with existing wallets.',
       type: 'BIP',
       date: new Date('2025-09-10'),
       external_link: 'https://github.com/bitcoin/bips/blob/master/bip-0420.mediawiki',
@@ -206,7 +225,8 @@ async function seed() {
     },
     {
       title: 'Hybrid Signatures: Classical + Post-Quantum',
-      summary: 'Explores hybrid signature schemes that combine ECDSA/Schnorr with post-quantum algorithms. Provides security during transition period and backward compatibility.',
+      summary:
+        'Explores hybrid signature schemes that combine ECDSA/Schnorr with post-quantum algorithms. Provides security during transition period and backward compatibility.',
       type: 'Research',
       date: new Date('2024-12-15'),
       external_link: 'https://hybrid-sig.research.com/bitcoin',
@@ -219,7 +239,8 @@ async function seed() {
     },
     {
       title: 'Quantum Computing Progress: 2024 Update',
-      summary: 'Annual review of quantum computing hardware progress. Covers IBM, Google, IonQ, and Rigetti developments. Assesses current qubit counts and error rates relative to Shor\'s algorithm requirements.',
+      summary:
+        "Annual review of quantum computing hardware progress. Covers IBM, Google, IonQ, and Rigetti developments. Assesses current qubit counts and error rates relative to Shor's algorithm requirements.",
       type: 'Article',
       date: new Date('2024-01-10'),
       external_link: 'https://quantum-review.com/2024-annual',
@@ -233,7 +254,8 @@ async function seed() {
     },
     {
       title: 'Mining Pool Perspectives on Quantum Threats',
-      summary: 'Interviews with major Bitcoin mining pool operators on quantum threat preparedness. Discusses hardware upgrade timelines and economic incentives for post-quantum transition.',
+      summary:
+        'Interviews with major Bitcoin mining pool operators on quantum threat preparedness. Discusses hardware upgrade timelines and economic incentives for post-quantum transition.',
       type: 'Article',
       date: new Date('2025-06-22'),
       external_link: 'https://mining-insights.com/quantum-perspectives',
@@ -246,7 +268,8 @@ async function seed() {
     },
     {
       title: 'Lattice-Based Cryptography Primer for Bitcoin Developers',
-      summary: 'Introduction to lattice-based cryptography (foundation of Dilithium, Kyber, FALCON). Explains Learning With Errors (LWE) problem and why it\'s believed quantum-resistant.',
+      summary:
+        "Introduction to lattice-based cryptography (foundation of Dilithium, Kyber, FALCON). Explains Learning With Errors (LWE) problem and why it's believed quantum-resistant.",
       type: 'Article',
       date: new Date('2024-07-30'),
       external_link: 'https://dev.bitcoin.org/quantum/lattice-primer',
@@ -260,7 +283,8 @@ async function seed() {
     },
     {
       title: 'Economic Analysis: Cost of NOT Upgrading to Post-Quantum',
-      summary: 'Models economic impact of delayed post-quantum migration. Estimates potential value at risk if Bitcoin addresses remain ECDSA-only until quantum computers are viable.',
+      summary:
+        'Models economic impact of delayed post-quantum migration. Estimates potential value at risk if Bitcoin addresses remain ECDSA-only until quantum computers are viable.',
       type: 'Research',
       date: new Date('2025-02-28'),
       external_link: 'https://economics.bitcoin-research.org/pqc-cost',
@@ -274,7 +298,8 @@ async function seed() {
     },
     {
       title: 'Post-Quantum Bitcoin: A Roadmap',
-      summary: 'Community-driven roadmap for transitioning Bitcoin to post-quantum security. Outlines 4 phases: research (2024-2025), testnet (2026), opt-in mainnet (2027-2028), full deployment (2029+).',
+      summary:
+        'Community-driven roadmap for transitioning Bitcoin to post-quantum security. Outlines 4 phases: research (2024-2025), testnet (2026), opt-in mainnet (2027-2028), full deployment (2029+).',
       type: 'Article',
       date: new Date('2025-12-01'),
       external_link: 'https://pqbitcoin.org/roadmap',
