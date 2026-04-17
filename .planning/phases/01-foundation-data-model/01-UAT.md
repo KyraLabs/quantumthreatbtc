@@ -1,5 +1,5 @@
 ---
-status: complete
+status: diagnosed
 phase: 01-foundation-data-model
 source:
   - 01-01-SUMMARY.md
@@ -115,23 +115,55 @@ blocked: 1
 ## Gaps
 
 - truth: "npm run lint reports zero errors and zero warnings"
-  status: failed
+  status: diagnosed
   reason: "User reported: 10 errors, 4 warnings — noNonNullAssertion in db/index.ts, db/migrate.ts, drizzle.config.ts; unused import in lib/meilisearch.ts; unsorted imports in db/schema.ts, db/seed.ts, scripts/*.ts; formatter violations in multiple files; useIterableCallbackReturn in scripts/verify-tables.ts"
   severity: major
   test: 4
-  artifacts: []
-  missing: []
+  root_cause: "Non-null assertions (!) on process.env.DATABASE_URL in db/index.ts, db/migrate.ts, drizzle.config.ts instead of guard pattern. Unused Resource type import in lib/meilisearch.ts. forEach callback with implicit return in scripts/verify-tables.ts. Multiple files committed without running biome format/check first."
+  artifacts:
+    - path: "db/index.ts"
+      issue: "process.env.DATABASE_URL! — noNonNullAssertion violation"
+    - path: "db/migrate.ts"
+      issue: "process.env.DATABASE_URL! — noNonNullAssertion violation"
+    - path: "drizzle.config.ts"
+      issue: "process.env.DATABASE_URL! — noNonNullAssertion violation"
+    - path: "lib/meilisearch.ts"
+      issue: "import type { Resource } declared but never used in the file"
+    - path: "scripts/verify-tables.ts"
+      issue: "forEach callback has implicit return — needs block braces"
+    - path: "drizzle/meta/"
+      issue: "Generated files included in Biome check — should be in files.ignore"
+  missing:
+    - "Run biome check --write to auto-fix formatter, organizeImports, and unused import"
+    - "Replace process.env.DATABASE_URL! with guard pattern in 3 files"
+    - "Fix forEach callback in scripts/verify-tables.ts to use block braces"
+    - "Add drizzle/meta/ to files.ignore in biome.json"
 - truth: "Meilisearch resources index exists with 18 documents indexed"
-  status: failed
+  status: diagnosed
   reason: "User reported: Meilisearch dashboard shows no indexes at all — 'Select an index' dropdown is empty. No resources index exists."
   severity: major
   test: 7
-  artifacts: []
-  missing: []
+  root_cause: "addDocuments() in Meilisearch client is async and returns an EnqueuedTask immediately. db/seed.ts calls syncResourceToMeilisearch() in a loop but exits with process.exit(0) before Meilisearch finishes processing the queued indexing tasks. On container restart, the indexes/ directory is empty because writes never completed."
+  artifacts:
+    - path: "db/seed.ts"
+      issue: "Calls syncResourceToMeilisearch() then exits immediately — does not await task completion"
+    - path: "lib/meilisearch.ts"
+      issue: "syncResourceToMeilisearch returns EnqueuedTask but callers don't wait for task completion"
+  missing:
+    - "Collect EnqueuedTask UIDs from each addDocuments() call in seed"
+    - "Await meilisearchClient.waitForTasks(taskUids) before process.exit(0)"
+    - "Consider startup sync script to re-index from PostgreSQL when Meilisearch index is empty"
 - truth: "./scripts/backup.sh runs without manual env export and produces a .dump file"
-  status: failed
+  status: diagnosed
   reason: "User reported: script exits with 'Error: DATABASE_URL environment variable not set. Load it from .env or export manually' — backup.sh does not auto-load .env"
   severity: major
   test: 9
-  artifacts: []
-  missing: []
+  root_cause: "Bash scripts have no dotenv equivalent. backup.sh and restore.sh check for DATABASE_URL but never load .env. TypeScript scripts use import 'dotenv/config' but bash cannot."
+  artifacts:
+    - path: "scripts/backup.sh"
+      issue: "No .env loading before DATABASE_URL check on line 8"
+    - path: "scripts/restore.sh"
+      issue: "No .env loading before DATABASE_URL check on line 22"
+  missing:
+    - "Add 'set -a; source .env; set +a' block after set -euo pipefail in backup.sh"
+    - "Add same block to restore.sh"
