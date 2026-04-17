@@ -1,13 +1,12 @@
 import { MeiliSearch } from 'meilisearch';
-import 'dotenv/config';
 
-if (!process.env.MEILISEARCH_URL || !process.env.MEILISEARCH_MASTER_KEY) {
+if (!process.env.MEILISEARCH_URL || !process.env.MEILISEARCH_API_KEY) {
   throw new Error('Missing Meilisearch environment variables');
 }
 
 export const meilisearchClient = new MeiliSearch({
   host: process.env.MEILISEARCH_URL,
-  apiKey: process.env.MEILISEARCH_MASTER_KEY,
+  apiKey: process.env.MEILISEARCH_API_KEY,
 });
 
 export async function initializeMeilisearchIndex() {
