@@ -7,5 +7,6 @@ import { meilisearchClient } from '../lib/meilisearch';
     console.log('Meilisearch stats:', JSON.stringify(stats, null, 2));
   } catch (error) {
     console.error('Error:', error);
+    process.exit(1);
   }
 })();
