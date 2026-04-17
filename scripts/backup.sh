@@ -1,6 +1,14 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+if [ -z "${DATABASE_URL:-}" ] && [ -f ".env" ]; then
+  while IFS= read -r line || [ -n "$line" ]; do
+    [[ "$line" =~ ^[[:space:]]*# ]] && continue
+    [[ -z "${line// }" ]] && continue
+    export "$line"
+  done < .env
+fi
+
 # Manual backup script for QuantumThreat BTC database
 # Uses pg_dump with custom format for flexibility
 

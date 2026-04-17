@@ -1,6 +1,14 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+if [ -z "${DATABASE_URL:-}" ] && [ -f ".env" ]; then
+  while IFS= read -r line || [ -n "$line" ]; do
+    [[ "$line" =~ ^[[:space:]]*# ]] && continue
+    [[ -z "${line// }" ]] && continue
+    export "$line"
+  done < .env
+fi
+
 # Manual restore script for QuantumThreat BTC database
 # ⚠️ WARNING: This OVERWRITES the target database!
 # Always restore to staging/local first, never production directly
