@@ -1,4 +1,4 @@
-import { syncResourceToMeilisearch } from '../lib/meilisearch';
+import { meilisearchClient, syncResourceToMeilisearch } from '../lib/meilisearch';
 import { db } from './index';
 import { resources, tags } from './schema';
 
@@ -316,9 +316,14 @@ async function seed() {
   const insertedResources = await db.insert(resources).values(resourceData).returning();
   console.log(`Seeded ${insertedResources.length} resources`);
 
+  const taskUids: number[] = [];
   for (const resource of insertedResources) {
-    await syncResourceToMeilisearch(resource);
+    const task = await syncResourceToMeilisearch(resource);
+    taskUids.push(task.taskUid);
   }
+
+  console.log(`Waiting for ${taskUids.length} Meilisearch indexing tasks...`);
+  await meilisearchClient.waitForTasks(taskUids);
   console.log('Synced resources to Meilisearch');
 
   console.log('Seed complete');
