@@ -34,24 +34,26 @@ metrics:
 
 ## What Was Built
 
-The seed script previously called syncResourceToMeilisearch() in a loop and discarded the returned EnqueuedTask. Because process.exit(0) fired via .finally() before Meilisearch finished processing the async indexing tasks, the documents were never written to disk. After a container restart, the index was empty.
+The seed script previously called `syncResourceToMeilisearch()` in a loop and discarded the returned `EnqueuedTask`. Because `process.exit(0)` fired via `.finally()` before Meilisearch finished processing the async indexing tasks, the documents were never written to disk. After a container restart, the index was empty.
 
 The fix:
-1. Added meilisearchClient to the import from ../lib/meilisearch
-2. Stored the returned EnqueuedTask from each syncResourceToMeilisearch call
-3. Collected all taskUid values into a taskUids: number[] array
-4. Called await meilisearchClient.waitForTasks(taskUids) before the console.log line
+1. Added `meilisearchClient` to the import from `../lib/meilisearch`
+2. Stored the returned `EnqueuedTask` from each `syncResourceToMeilisearch` call
+3. Collected all `taskUid` values into a `taskUids: number[]` array
+4. Called `await meilisearchClient.waitForTasks(taskUids)` before the `console.log('Synced resources to Meilisearch')` line
 
 Seed output now includes:
-  Waiting for 18 Meilisearch indexing tasks...
-  Synced resources to Meilisearch
+```
+Waiting for 18 Meilisearch indexing tasks...
+Synced resources to Meilisearch
+```
 
 ## Verification
 
-- db/seed.ts imports meilisearchClient and calls waitForTasks(taskUids)
+- `db/seed.ts` imports `meilisearchClient` and calls `waitForTasks(taskUids)`
 - Seed output printed "Waiting for 18 Meilisearch indexing tasks..." before exit
-- After docker compose restart meilisearch, check-meilisearch.ts confirmed numberOfDocuments: 18
-- check-meilisearch.ts exited 0
+- After `docker compose restart meilisearch`, `check-meilisearch.ts` confirmed `numberOfDocuments: 18`
+- `check-meilisearch.ts` exited 0
 
 ## Deviations from Plan
 
@@ -59,6 +61,6 @@ None — plan executed exactly as written.
 
 ## Self-Check: PASSED
 
-- db/seed.ts exists and contains waitForTasks
-- Commit 797a4aa exists
-- Meilisearch index has 18 documents after container restart
+- [x] `db/seed.ts` exists and contains `waitForTasks`
+- [x] Commit 797a4aa exists
+- [x] Meilisearch index has 18 documents after container restart
