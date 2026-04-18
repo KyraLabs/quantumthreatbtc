@@ -1,0 +1,12 @@
+services:
+  meilisearch:
+    image: getmeili/meilisearch:v1.16
+    container_name: quantumthreat-meilisearch
+    ports:
+      - "7700:7700"
+    environment:
+      - MEILI_MASTER_KEY=${MEILISEARCH_MASTER_KEY}
+      - MEILI_ENV=development
+    volumes:
+      - ./data.ms:/meili_data
+    restart: unless-stopped

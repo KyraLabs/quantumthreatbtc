@@ -51,10 +51,10 @@
 
 ### Data Foundation
 
-- [ ] **DATA-01**: Database schema includes Resources table with full-text search support
-- [ ] **DATA-02**: Database schema includes controlled Tag vocabulary
-- [ ] **DATA-03**: Database schema includes last_verified timestamp for staleness detection
-- [ ] **DATA-04**: Database uses GIN indexes for full-text search performance
+- [x] **DATA-01**: Database schema includes Resources table with full-text search support
+- [x] **DATA-02**: Database schema includes controlled Tag vocabulary
+- [x] **DATA-03**: Database schema includes last_verified timestamp for staleness detection
+- [x] **DATA-04**: Database uses GIN indexes for full-text search performance
 - [ ] **DATA-05**: Backup and restore procedures are tested and documented
 
 ## v2 Requirements
@@ -103,10 +103,10 @@
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| DATA-01 | Phase 1 | Pending |
-| DATA-02 | Phase 1 | Pending |
-| DATA-03 | Phase 1 | Pending |
-| DATA-04 | Phase 1 | Pending |
+| DATA-01 | Phase 1 | Complete |
+| DATA-02 | Phase 1 | Complete |
+| DATA-03 | Phase 1 | Complete |
+| DATA-04 | Phase 1 | Complete |
 | DATA-05 | Phase 1 | Pending |
 | DISC-01 | Phase 2 | Pending |
 | DISC-02 | Phase 2 | Pending |
