@@ -2,8 +2,8 @@
 set -euo pipefail
 
 if [ -z "${DATABASE_URL:-}" ] && [ -f ".env" ]; then
-  DATABASE_URL="$(grep '^DATABASE_URL=' .env | cut -d'=' -f2-)"
-  export DATABASE_URL
+  DATABASE_URL="$(awk -F= '/^[[:space:]]*(export[[:space:]]+)?DATABASE_URL=/{val=substr($0,index($0,"=")+1); gsub(/\r/,"",val); gsub(/^[[:space:]"'"'"']+|[[:space:]"'"'"']+$/,"",val); print val; exit}' .env)"
+  [ -n "$DATABASE_URL" ] && export DATABASE_URL
 fi
 
 # Manual restore script for QuantumThreat BTC database

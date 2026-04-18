@@ -17,15 +17,13 @@ async function runSmokeTest() {
 
     const sampleId = '019d9481-b79b-7287-9f8c-1e6d18a26b29';
 
-    if (sampleId !== 'TBD') {
-      const sampleResource = await sql`
-        SELECT id, title FROM resources WHERE id = ${sampleId}
-      `;
-      if (sampleResource.length === 0) {
-        console.warn('⚠ Known sample resource not found');
-      } else {
-        console.log(`✓ Sample resource verified: ${sampleResource[0].title}`);
-      }
+    const sampleResource = await sql`
+      SELECT id, title FROM resources WHERE id = ${sampleId}
+    `;
+    if (sampleResource.length === 0) {
+      console.warn('⚠ Known sample resource not found');
+    } else {
+      console.log(`✓ Sample resource verified: ${sampleResource[0].title}`);
     }
 
     const firstResource = await sql`SELECT id, title FROM resources LIMIT 1`;
@@ -46,9 +44,11 @@ async function runSmokeTest() {
     `;
     console.log(`✓ Indexes verified: ${indexes.length} indexes found`);
 
-    const ginIndexes = indexes.filter((idx: { indexdef: string }) => idx.indexdef.includes('gin'));
+    const ginIndexes = (indexes as unknown as Array<{ indexname: string; indexdef: string }>).filter(
+      (idx) => /USING gin/i.test(idx.indexdef)
+    );
     if (ginIndexes.length < 2) {
-      console.warn(`⚠ Expected 2 GIN indexes, found ${ginIndexes.length}`);
+      throw new Error(`Missing GIN indexes for full-text search (expected 2, found ${ginIndexes.length})`);
     }
 
     console.log('\n✅ Smoke test PASSED — backup restore successful');

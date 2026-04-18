@@ -10,11 +10,15 @@ if (!databaseUrl) {
 const sql = postgres(databaseUrl, { max: 1 });
 const db = drizzle(sql);
 
-async function runMigrations() {
-  console.log('Running migrations...');
-  await migrate(db, { migrationsFolder: './drizzle' });
-  console.log('Migrations complete');
-  await sql.end();
-}
-
-runMigrations().catch(console.error);
+(async () => {
+  try {
+    console.log('Running migrations...');
+    await migrate(db, { migrationsFolder: './drizzle' });
+    console.log('Migrations complete');
+  } catch (err) {
+    console.error(err);
+    process.exit(1);
+  } finally {
+    await sql.end();
+  }
+})();
