@@ -15,23 +15,15 @@ async function runSmokeTest() {
       throw new Error('Resources table is empty — backup may be incomplete');
     }
 
-    const sampleId = '019d9481-b79b-7287-9f8c-1e6d18a26b29';
+    const overrideId = process.env.SAMPLE_RESOURCE_ID;
+    const sampleResource = overrideId
+      ? await sql`SELECT id, title FROM resources WHERE id = ${overrideId} LIMIT 1`
+      : await sql`SELECT id, title FROM resources ORDER BY created_at ASC LIMIT 1`;
 
-    const sampleResource = await sql`
-      SELECT id, title FROM resources WHERE id = ${sampleId}
-    `;
     if (sampleResource.length === 0) {
-      console.warn('⚠ Known sample resource not found');
-    } else {
-      console.log(`✓ Sample resource verified: ${sampleResource[0].title}`);
-    }
-
-    const firstResource = await sql`SELECT id, title FROM resources LIMIT 1`;
-    if (firstResource.length > 0) {
-      console.log(`✓ Fallback resource verified: ${firstResource[0].title}`);
-    } else {
       throw new Error('No resources found — backup is empty');
     }
+    console.log(`✓ Sample resource verified: ${sampleResource[0].title}`);
 
     const tagCount = await sql`SELECT count(*)::int as count FROM tags`;
     console.log(`✓ Tags table accessible: ${tagCount[0].count} rows`);

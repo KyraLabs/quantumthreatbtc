@@ -12,7 +12,7 @@ export const meilisearchClient = new MeiliSearch({
 export async function initializeMeilisearchIndex() {
   const index = meilisearchClient.index('resources');
 
-  await index.updateSettings({
+  const enqueuedTask = await index.updateSettings({
     searchableAttributes: ['title', 'summary', 'authors', 'tags'],
     filterableAttributes: ['type', 'date', 'technical_level', 'tags'],
     sortableAttributes: ['date'],
@@ -25,6 +25,12 @@ export async function initializeMeilisearchIndex() {
       },
     },
   });
+
+  const completedTask = await meilisearchClient.waitForTask(enqueuedTask.taskUid);
+
+  if (completedTask.status !== 'succeeded') {
+    throw new Error(`Meilisearch index configuration failed with status: ${completedTask.status}`);
+  }
 
   console.log('Meilisearch index configured');
 }

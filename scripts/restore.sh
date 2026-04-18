@@ -34,7 +34,7 @@ fi
 echo "⚠️  WARNING: This will OVERWRITE the database at:"
 echo "   $DATABASE_URL"
 echo ""
-read -p "Are you sure you want to restore? (yes/no): " CONFIRM
+read -rp "Are you sure you want to restore? (yes/no): " CONFIRM
 
 if [ "$CONFIRM" != "yes" ]; then
   echo "Restore cancelled"
