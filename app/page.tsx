@@ -1,10 +1,17 @@
 export default function Home() {
-  return (
-    <main className="flex min-h-screen flex-col items-center justify-center p-24">
-      <div className="z-10 w-full max-w-5xl items-center justify-between font-mono text-sm">
-        <h1 className="text-4xl font-bold mb-4">QuantumThreat BTC</h1>
-        <p className="text-xl">A curated resource hub for Bitcoin quantum resistance research</p>
-      </div>
-    </main>
-  );
+	return (
+		<main className="flex flex-1 flex-col items-center justify-center gap-6 px-6 py-24 text-center">
+			<span className="rounded-full border border-foreground/15 px-3 py-1 text-xs font-medium uppercase tracking-widest text-foreground/60">
+				Work in progress
+			</span>
+			<h1 className="max-w-2xl text-balance text-4xl font-semibold tracking-tight sm:text-5xl">
+				QuantumThreat BTC
+			</h1>
+			<p className="max-w-xl text-balance text-lg leading-8 text-foreground/70">
+				A curated hub for everything about the quantum threat to Bitcoin:
+				papers, BIPs, articles, YouTube videos, Delving Bitcoin posts, and
+				mailing-list threads, gathered in one place.
+			</p>
+		</main>
+	);
 }
