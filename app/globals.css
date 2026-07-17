@@ -1,26 +1,221 @@
 @import "tailwindcss";
 
+/* ============================================================
+   Design tokens
+   Dark is the default (:root); light overrides via [data-theme="light"].
+   ============================================================ */
 :root {
-	--background: #ffffff;
-	--foreground: #171717;
+	--sans: "Helvetica Neue", Helvetica, Arial, "Liberation Sans", sans-serif;
+	--mono: var(--font-jetbrains-mono), ui-monospace, "SF Mono", Menlo, monospace;
+
+	--bg: #0e0f11;
+	--bg-2: #141517;
+	--bg-3: #1b1c1f;
+	--sunken: #060607;
+	--card: #141517;
+	--card-2: #1b1c1f;
+	--bd: #26282c;
+	--bd-2: #3a3d43;
+	--tx: #f6f6f7;
+	--tx-2: #cbcdd2;
+	--mut: #9a9da4;
+	--faint: #6e7178;
+	--red: #d27270;
+	--red-solid: #9e2023;
+	--orange: #ea8a66;
+	--orange-2: #e36f46;
+	--cyan: #2dc0e5;
+	--cyan-2: #00add8;
+	--tint-red: rgba(158, 32, 35, 0.16);
+	--tint-orange: rgba(227, 111, 70, 0.14);
+	--tint-cyan: rgba(0, 173, 216, 0.14);
+	--tint-neutral: rgba(255, 255, 255, 0.06);
+	--header: rgba(10, 11, 13, 0.82);
+	--shadow: 0 6px 24px rgba(0, 0, 0, 0.45);
+	--shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.35);
+	--shadow-focus: 0 0 0 3px rgba(0, 173, 216, 0.45);
 }
 
+[data-theme="light"] {
+	--bg: #ffffff;
+	--bg-2: #fbfbfc;
+	--bg-3: #f1f1f3;
+	--sunken: #f6f6f7;
+	--card: #ffffff;
+	--card-2: #fafafb;
+	--bd: #e2e3e6;
+	--bd-2: #c7c9ce;
+	--tx: #0e0f11;
+	--tx-2: #33363b;
+	--mut: #5e6168;
+	--faint: #888b92;
+	--red: #9e2023;
+	--red-solid: #9e2023;
+	--orange: #c5572f;
+	--orange-2: #e36f46;
+	--cyan: #0089ab;
+	--cyan-2: #00add8;
+	--tint-red: rgba(158, 32, 35, 0.08);
+	--tint-orange: rgba(227, 111, 70, 0.1);
+	--tint-cyan: rgba(0, 173, 216, 0.1);
+	--tint-neutral: rgba(14, 15, 17, 0.05);
+	--header: rgba(255, 255, 255, 0.85);
+	--shadow: 0 6px 24px rgba(14, 15, 17, 0.1);
+	--shadow-sm: 0 2px 8px rgba(14, 15, 17, 0.07);
+}
+
+/* Expose tokens to Tailwind utilities (bg-*, text-*, border-*, font-*). */
 @theme inline {
-	--color-background: var(--background);
-	--color-foreground: var(--foreground);
-	--font-sans: var(--font-geist-sans);
-	--font-mono: var(--font-geist-mono);
+	--color-bg: var(--bg);
+	--color-bg-2: var(--bg-2);
+	--color-bg-3: var(--bg-3);
+	--color-sunken: var(--sunken);
+	--color-card: var(--card);
+	--color-card-2: var(--card-2);
+	--color-bd: var(--bd);
+	--color-bd-2: var(--bd-2);
+	--color-tx: var(--tx);
+	--color-tx-2: var(--tx-2);
+	--color-mut: var(--mut);
+	--color-faint: var(--faint);
+	--color-red: var(--red);
+	--color-orange: var(--orange);
+	--color-orange-2: var(--orange-2);
+	--color-cyan: var(--cyan);
+	--color-cyan-2: var(--cyan-2);
+	--color-tint-red: var(--tint-red);
+	--color-tint-orange: var(--tint-orange);
+	--color-tint-cyan: var(--tint-cyan);
+	--color-tint-neutral: var(--tint-neutral);
+	--font-sans: var(--sans);
+	--font-mono: var(--mono);
 }
 
-@media (prefers-color-scheme: dark) {
-	:root {
-		--background: #0a0a0a;
-		--foreground: #ededed;
+/* ============================================================
+   Base
+   Kept in @layer base so Tailwind utilities (in the utilities
+   layer) can override element defaults such as anchor color.
+   ============================================================ */
+@layer base {
+	* {
+		box-sizing: border-box;
+	}
+
+	html,
+	body {
+		margin: 0;
+		padding: 0;
+	}
+
+	body {
+		background: var(--bg);
+		color: var(--tx-2);
+		font-family: var(--sans);
+		font-size: 16px;
+		line-height: 1.55;
+		-webkit-font-smoothing: antialiased;
+	}
+
+	a {
+		color: var(--cyan);
+		text-decoration: none;
+	}
+
+	a:hover {
+		color: var(--cyan-2);
+	}
+
+	::selection {
+		background: var(--orange-2);
+		color: #141517;
+	}
+
+	::placeholder {
+		color: var(--faint);
+	}
+
+	*::-webkit-scrollbar {
+		width: 10px;
+		height: 10px;
+	}
+
+	*::-webkit-scrollbar-thumb {
+		background: var(--bd-2);
+		border-radius: 99px;
+		border: 2px solid transparent;
+		background-clip: padding-box;
+	}
+
+	input[type="checkbox"] {
+		accent-color: var(--orange-2);
+	}
+
+	input[type="date"] {
+		color-scheme: dark;
+	}
+
+	[data-theme="light"] input[type="date"] {
+		color-scheme: light;
 	}
 }
 
-body {
-	background: var(--background);
-	color: var(--foreground);
-	font-family: Arial, Helvetica, sans-serif;
+@keyframes qtfade {
+	from {
+		opacity: 0;
+		transform: translateY(8px);
+	}
+	to {
+		opacity: 1;
+		transform: none;
+	}
+}
+
+@keyframes qtpulse {
+	0%,
+	100% {
+		opacity: 0.5;
+	}
+	50% {
+		opacity: 1;
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	* {
+		/* biome-ignore lint/complexity/noImportantStyles: must override element animations for accessibility */
+		animation: none !important;
+		/* biome-ignore lint/complexity/noImportantStyles: must override element transitions for accessibility */
+		transition: none !important;
+	}
+}
+
+/* ============================================================
+   Retro dev-blog treatment: sharp corners, flat, solid header,
+   monospace titles. Applied whenever data-theme is set (always).
+   ============================================================ */
+[data-theme] * {
+	/* biome-ignore lint/complexity/noImportantStyles: retro treatment must flatten every component radius */
+	border-radius: 0 !important;
+}
+
+[data-theme] {
+	--header: var(--bg);
+	--shadow: none;
+	--shadow-sm: none;
+}
+
+header {
+	/* biome-ignore lint/complexity/noImportantStyles: retro header is solid, overriding the base blur */
+	backdrop-filter: none !important;
+	/* biome-ignore lint/complexity/noImportantStyles: retro header is solid, overriding the base blur */
+	-webkit-backdrop-filter: none !important;
+	/* biome-ignore lint/complexity/noImportantStyles: retro header accent must override base border */
+	border-top: 2px solid var(--orange-2) !important;
+}
+
+h1 {
+	/* biome-ignore lint/complexity/noImportantStyles: retro titles are monospace regardless of context */
+	font-family: var(--mono) !important;
+	/* biome-ignore lint/complexity/noImportantStyles: retro titles are bold regardless of context */
+	font-weight: 700 !important;
 }
