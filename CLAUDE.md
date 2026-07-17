@@ -16,6 +16,7 @@ planned incrementally.
 - Code, comments, commit messages, and docs in English.
 - Keep comments minimal; only when intent is not obvious.
 - No emojis in code, logs, or docs.
-- Lint and format with Biome (`npm run lint`, `npm run format`).
+- Use pnpm as the package manager (never npm/yarn directly).
+- Lint and format with Biome (`pnpm lint`, `pnpm format`).
 
 @AGENTS.md
