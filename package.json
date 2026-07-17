@@ -1,38 +1,27 @@
 {
-  "name": "quantumthreatbtc",
-  "version": "0.1.0",
-  "private": true,
-  "scripts": {
-    "dev": "next dev --turbopack",
-    "build": "next build",
-    "start": "next start",
-    "lint": "biome check .",
-    "format": "biome format --write .",
-    "db:generate": "drizzle-kit generate",
-    "db:migrate": "tsx db/migrate.ts",
-    "db:seed": "tsx db/seed.ts",
-    "db:studio": "drizzle-kit studio"
-  },
-  "dependencies": {
-    "dotenv": "^16.4.0",
-    "drizzle-orm": "^0.45.2",
-    "meilisearch": "^0.45.0",
-    "next": "^16.2.0",
-    "postgres": "^3.4.0",
-    "react": "^19.0.0",
-    "react-dom": "^19.0.0",
-    "zod": "^4.0.0"
-  },
-  "devDependencies": {
-    "@biomejs/biome": "^2.3.0",
-    "@tailwindcss/postcss": "^4.2.2",
-    "@types/node": "^22.0.0",
-    "@types/react": "^19.0.0",
-    "@types/react-dom": "^19.0.0",
-    "drizzle-kit": "^0.31.0",
-    "postcss": "^8.4.0",
-    "tailwindcss": "^4.0.0",
-    "tsx": "^4.19.0",
-    "typescript": "^6.0.0"
-  }
+	"name": "quantumthreatbtc",
+	"version": "0.1.0",
+	"private": true,
+	"scripts": {
+		"dev": "next dev",
+		"build": "next build",
+		"start": "next start",
+		"lint": "biome check .",
+		"format": "biome format --write ."
+	},
+	"dependencies": {
+		"next": "16.2.10",
+		"react": "19.2.4",
+		"react-dom": "19.2.4"
+	},
+	"devDependencies": {
+		"@biomejs/biome": "2.5.4",
+		"@tailwindcss/postcss": "^4",
+		"@types/node": "^20",
+		"@types/react": "^19",
+		"@types/react-dom": "^19",
+		"tailwindcss": "^4",
+		"typescript": "^5"
+	},
+	"packageManager": "pnpm@11.13.1+sha512.b2fc7683b8a6525414e7d13e1ba28caaddde96bf66ec540bfaeb7e702b81f3e0be4d1f295edf7f9fe0396740a8dce4509c582ddf79891f4543fea32d37645f25"
 }
